@@ -1,11 +1,5 @@
----
-title: "Reproducible Research - Assignment 1"
-output:
-  html_document:
-    keep_md: true
----
 
-
+##Reproducible Research - Assignment 1
 
 
 ```r
