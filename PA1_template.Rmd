@@ -81,7 +81,7 @@ The **mean** and **median** are almost the same as the dataset omitted missing v
 ##Are there differences in activity patterns between weekdays and weekends?
 
 ```{r}
-#Create a new factor variable in the dataset with two levels – “weekday” and “weekend” indicating whether a given date is a weekday or weekend
+#Create a new factor variable in the dataset with two levels - "weekday" and "weekend" indicating whether a given date is a weekday or weekend
 
 day<-newdata$date
 newdata<-cbind(newdata,day)
