@@ -1,6 +1,8 @@
 # Reproducible Research - Assignment 1
 
 
+
+
 ```r
 library(plyr)
 library(lattice)
@@ -27,7 +29,7 @@ steps<-aggregate(steps ~ date, tidydata, sum)
 hist(steps$steps, main="Total number of steps taken each day", xlab="Steps/Day", col="red")
 ```
 
-![plot of chunk unnamed-chunk-3](figure/unnamed-chunk-3-1.png) 
+![](PA1_template_files/figure-html/unnamed-chunk-3-1.png) 
 
 ```r
 #Calculate the mean and median
@@ -62,7 +64,7 @@ avgStep<-tapply(tidydata$steps, tidydata$interval, mean)
 plot(Interval,avgStep,type="l",ylab="Average steps", main="Average steps per interval")
 ```
 
-![plot of chunk unnamed-chunk-4](figure/unnamed-chunk-4-1.png) 
+![](PA1_template_files/figure-html/unnamed-chunk-4-1.png) 
 
 ```r
 #Which 5-minute interval, on average across all the days in the dataset, contains the maximum number of steps?
@@ -105,7 +107,7 @@ newsteps<-aggregate(steps ~ date, newdata, sum)
 hist(newsteps$steps, main="Total number of steps taken each day", xlab="Steps/Day", col="red",breaks=10)
 ```
 
-![plot of chunk unnamed-chunk-7](figure/unnamed-chunk-7-1.png) 
+![](PA1_template_files/figure-html/unnamed-chunk-7-1.png) 
 
 ```r
 mean<-mean(newsteps$steps)
@@ -153,7 +155,7 @@ xyplot(steps ~ interval | day, data = newavgStep, type = "l", layout = c(1, 2),
     xlab = "Interval", ylab = "Number of steps", main = "Average steps by day")
 ```
 
-![plot of chunk unnamed-chunk-8](figure/unnamed-chunk-8-1.png) 
+![](PA1_template_files/figure-html/unnamed-chunk-8-1.png) 
 
 ***The End***
 
