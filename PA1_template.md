@@ -10,6 +10,7 @@ library(lattice)
 ```r
 # Read the data into R.
 data<-read.csv("activity.csv", header=T, sep=",", na.strings="NA")
+
 #Convert the date into date class
 data$date<-as.Date(data$date, "%Y-%m-%d")
 ```
@@ -66,7 +67,8 @@ plot(Interval,avgStep,type="l",ylab="Average steps", main="Average steps per int
 ![plot of chunk unnamed-chunk-4](figure/unnamed-chunk-4-1.png) 
 
 ```r
-#Which 5-minute interval, on average across all the days in the dataset, contains the maximum number of steps?
+#Which 5-minute interval, on average across all the days in the dataset, 
+#contains the maximum number of steps?
 maxsteps<-names(which.max(avgStep))
 maxsteps
 ```
@@ -79,7 +81,7 @@ The **835** 5-minute interval contains the maximum number of steps.
 ##Imputing missing values
 
 ```r
-#Calculate and report the total number of missing values in the dataset (i.e. the total number of rows with NAs)
+#Calculate and report the total number of missing values in the dataset
 dif<-nrow(data)-nrow(tidydata)
 dif
 ```
@@ -91,7 +93,9 @@ The total number of missing values in the dataset is: **2304**
 
 
 ```r
-#Devise a strategy for filling in all of the missing values in the dataset. The strategy does not need to be sophisticated. For example, you could use the mean/median for that day, or the mean for that 5-minute interval, etc.
+#Devise a strategy for filling in all of the missing values in the dataset. 
+#The strategy does not need to be sophisticated. For example, you could use the
+#mean/median for that day, or the mean for that 5-minute interval, etc.
 #Create a new dataset that is equal to the original dataset but with the missing data filled in.
 
 isna<-is.na(data)
@@ -100,10 +104,13 @@ newdata$steps[which(isna)]<-avgStep[match(data$interval[which(isna)],data$interv
 ```
 
 ```r
-#Make a histogram of the total number of steps taken each day and Calculate and report the mean and median total number of steps taken per day. Do these values differ from the estimates from the first part of the assignment? What is the impact of imputing missing data on the estimates of the total daily number of steps?
+#Make a histogram of the total number of steps taken each day and Calculate and report the mean
+#and median total number of steps taken per day. Do these values differ from the estimates from 
+#the first part of the assignment? What is the impact of imputing missing data on the estimates 
+#of the total daily number of steps?
 
 newsteps<-aggregate(steps ~ date, newdata, sum)
-hist(newsteps$steps, main="Total number of steps taken each day", xlab="Steps/Day", col="red",breaks=10)
+hist(newsteps$steps, main="Total number of steps taken each day", xlab="Steps/Day", col="red")
 ```
 
 ![plot of chunk unnamed-chunk-7](figure/unnamed-chunk-7-1.png) 
@@ -131,7 +138,8 @@ The **mean** and **median** are almost the same as the dataset omitted missing v
 
 
 ```r
-#Create a new factor variable in the dataset with two levels - "weekday" and "weekend" indicating whether a given date is a weekday or weekend
+#Create a new factor variable in the dataset with two levels - "weekday" and "weekend" 
+#indicating whether a given date is a weekday or weekend
 
 day<-newdata$date
 newdata<-cbind(newdata,day)
@@ -145,7 +153,10 @@ newdata$day<-gsub("Saturday", "Weekend",newdata$day)
 newdata$day<-gsub("Sunday", "Weekend",newdata$day)
 newdata$day<-as.factor(newdata$day)
 
-#Make a panel plot containing a time series plot (i.e. type = "l") of the 5-minute interval (x-axis) and the average number of steps taken, averaged across all weekday days or weekend days (y-axis). See the README file in the GitHub repository to see an example of what this plot should look like using simulated data
+#Make a panel plot containing a time series plot (i.e. type = "l") of the 5-minute interval 
+#(x-axis) and the average number of steps taken, averaged across all weekday days or weekend 
+#days (y-axis). See the README file in the GitHub repository to see an example of what this 
+#plot should look like using simulated data
 
 
 newavgStep <- ddply(newdata, .(interval, day), summarize, steps = mean(steps))
